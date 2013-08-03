@@ -1,0 +1,29 @@
+header {
+    
+}
+
+.pebble {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 2px solid #333;
+}
+
+.dark {
+    background-color: #555;
+}
+
+.remove:before {
+    content: "X";
+}
+
+.remove {
+    font-size: 60px;
+    line-height: 60px;
+    display: inline-block;
+}
+
+#memory td {
+    border: 1px solid #ccc;
+}
