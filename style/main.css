@@ -2,6 +2,27 @@ header {
     
 }
 
+#memory {
+    position: fixed;
+    right: 5px;
+    top: 5px;
+}
+
+.cell {
+    border: 1px solid #ccc;
+    height: 20px;
+    width: 20px;
+}
+
+.entry_cell {
+    width: 50px;
+}
+
+.memory_cell {
+    width: 10px;
+    height: 10px;
+}
+
 .pebble {
     display: inline-block;
     height: 40px;
