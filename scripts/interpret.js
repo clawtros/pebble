@@ -1,7 +1,7 @@
-define(['memory', 'registers', 'instructionrowentry', 'stack', 'instructionset'], 
+define(['memory', 'registers', 'entrytable', 'stack', 'instructionset'], 
        function (Memory, 
                  Registers, 
-                 InstructionRowEntry, 
+                 EntryTable, 
                  Stack, 
                  InstructionSet) 
 { 
@@ -28,13 +28,12 @@ define(['memory', 'registers', 'instructionrowentry', 'stack', 'instructionset']
         },
 
         initializeInput: function() {
-            for (var i = 0; i < 20; i++) {
-                var row = new InstructionRowEntry(
-                    document.getElementById("entry"),
-                    this.instructionset);
-                row.initElement();
-            }
-            document.getElementById('run').addEventListener('click', this.run, this);
+            var self = this;
+            this.entrytable = new EntryTable(document.getElementById('entry'), 20);
+            this.entrytable.initialize();
+            document.getElementById('run').addEventListener('click', function() {
+                self.run();
+            });
         },
 
         initialize: function() {
@@ -46,7 +45,7 @@ define(['memory', 'registers', 'instructionrowentry', 'stack', 'instructionset']
             this.initializeInput();
         },
         run: function() {
-            console.log('aah', this);
+            console.log(this.entrytable.getInstructions());
         }
     };
 
