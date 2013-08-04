@@ -14,6 +14,9 @@ define([], function() {
                 this.executionPosition = this.labels[label];
             }
         },
+        step: function() {
+            this.instructions[this.executionPosition++].execute();
+        },
         parse: function (instructions) {
             this.executionPosition = 0;
             this.labels = {};
@@ -23,6 +26,9 @@ define([], function() {
                 var instruction = instructions[i];
                 if (instruction.label) {
                     this.labels[instruction.label] = i;
+                }
+                // TODO: oh no the python trap
+                if (instruction.instruction) {
                     this.instructions.push(instruction);
                 }
             }

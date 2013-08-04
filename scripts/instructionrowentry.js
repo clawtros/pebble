@@ -40,12 +40,14 @@ define(['instructionrow'], function(InstructionRow) {
         },
 
         asInstructionRow: function() {
+            if (!this.labelCell.querySelector('input').value && !this.instructionCell.querySelector('input').value)
+                return false;
             return new InstructionRow(
                 this.instructionset,
-                this.labelCell.querySelector('.input').getAttribute('value'),
-                this.instructionCell.querySelector('.input').getAttribute('value'),
-                this.firstArgCell.querySelector('.input').getAttribute('value'),
-                this.secondArgCell.querySelector('.input').getAttribute('value'));
+                this.labelCell.querySelector('input').value,
+                this.instructionCell.querySelector('input').value,
+                this.firstArgCell.querySelector('input').value,
+                this.secondArgCell.querySelector('input').value);
                                       
         }
     };

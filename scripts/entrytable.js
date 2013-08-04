@@ -19,8 +19,9 @@ define(['instructionrowentry'], function(InstructionRowEntry) {
         getInstructions: function() {
             var instructions = [];
             for (var i = 0, l = this.rows.length; i < l; i++) {
-                if (this.rows[i].instruction) 
-                    instructions.push(this.rows[i].asInstructionRow());
+                var row = this.rows[i].asInstructionRow();
+                if (row) 
+                    instructions.push(row);
             }
             return instructions;
         }

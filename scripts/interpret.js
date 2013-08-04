@@ -45,7 +45,11 @@ define(['memory', 'registers', 'entrytable', 'stack', 'instructionset'],
             this.initializeInput();
         },
         run: function() {
-            console.log(this.entrytable.getInstructions());
+            var instructions = this.entrytable.getInstructions();
+            console.log(instructions);
+            this.stack.parse(instructions);
+            console.log(this.stack);
+            this.stack.step();
         }
     };
 
