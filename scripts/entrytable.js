@@ -1,6 +1,7 @@
 define(['instructionrowentry'], function(InstructionRowEntry) {
-    var EntryTable = function(parent, max_instructions) {
+    var EntryTable = function(parent, instructionset, max_instructions) {
         this.max_instructions = max_instructions;
+        this.instructionset = instructionset;
         this.parent = parent;
         this.rows = [];
     }

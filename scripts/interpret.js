@@ -29,7 +29,7 @@ define(['memory', 'registers', 'entrytable', 'stack', 'instructionset'],
 
         initializeInput: function() {
             var self = this;
-            this.entrytable = new EntryTable(document.getElementById('entry'), 20);
+            this.entrytable = new EntryTable(document.getElementById('entry'), this.instructionset, 20);
             this.entrytable.initialize();
             document.getElementById('run').addEventListener('click', function() {
                 self.run();
@@ -40,10 +40,11 @@ define(['memory', 'registers', 'entrytable', 'stack', 'instructionset'],
             this.initializeMemory();
             this.initializeRegisters();
             this.initializeStack();
-
+            console.log(this.memory, this.registers, this.stack);
             this.instructionset = new InstructionSet(this.memory, this.registers, this.stack);
             this.initializeInput();
         },
+
         run: function() {
             var instructions = this.entrytable.getInstructions();
             console.log(instructions);

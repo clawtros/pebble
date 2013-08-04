@@ -1,5 +1,3 @@
-
-
 define([], function () {
     var InstructionSet = function (memory, registers, stack) {
         this.memory = memory;
@@ -10,21 +8,17 @@ define([], function () {
     InstructionSet.prototype = {
         instructions: {
             "MOVE" : function(a, b) {
-                if (a.isPointer()) {
-                    a.value = b;
-                } else {
-                    throw Exception();
-                }
+                this.registers.get(a).value = b;
             },
             "STORE" : function (a, b) {
-                memory[a][b].value = registers.get(0).value;
+                this.memory[a][b].value = this.registers.get(0).value;
             },
             "RECALL" : function (a, b) {
-                registers.get(0).value = memory[a][b].value;
+                this.registers.get(0) = memory[a][b].value;
             },
             "JUMP_IF_ZERO" : function (a) {
                 if (registers.get(0) == 0) {
-                    stack.setExecutionPoint(stack.getLabel(a));
+                    this.stack.setExecutionPoint(this.stack.getLabel(a));
                 }
             }
         }
