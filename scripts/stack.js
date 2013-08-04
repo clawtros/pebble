@@ -9,6 +9,11 @@ define([], function() {
         canExecute: function() {
             return this.executionPosition < this.instructions.length;
         },
+        setExecutionPoint: function (label) {
+            if (this.labels[label]) {
+                this.executionPosition = this.labels[label];
+            }
+        },
         parse: function (instructions) {
             this.executionPosition = 0;
             this.labels = {};

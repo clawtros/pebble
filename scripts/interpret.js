@@ -17,36 +17,42 @@ define(['memory', 'registers', 'instructionrowentry', 'stack', 'instructionset']
             this.memory = new Memory(MEM_SIZE);
             this.memory.initialize();
         },
+
         initializeRegisters: function() {
             this.registers = new Registers(REGISTER_SIZE, document.getElementById("registers"));
             this.registers.initialize();
         },
+
         initializeStack: function() {
             this.stack = new Stack();
         },
+
+        initializeInput: function() {
+            for (var i = 0; i < 20; i++) {
+                var row = new InstructionRowEntry(
+                    document.getElementById("entry"),
+                    this.instructionset);
+                row.initElement();
+            }
+            document.getElementById('run').addEventListener('click', this.run, this);
+        },
+
         initialize: function() {
             this.initializeMemory();
-            this.initializeRegister();
+            this.initializeRegisters();
             this.initializeStack();
 
             this.instructionset = new InstructionSet(this.memory, this.registers, this.stack);
+            this.initializeInput();
         },
         run: function() {
-            while (this.stack.canExecute) {
-                
-            }
+            console.log('aah', this);
         }
     };
 
     // TODO: aah move this to a main thing
     var interpreter = new Interpreter();
-    interpreter.initializeMemory();
-    interpreter.initializeRegisters();
-
-    for (var i = 0; i < 20; i++) {
-        var row = new InstructionRowEntry(document.getElementById("entry"));
-        row.initElement();
-    }
+    interpreter.initialize();
 
     return Interpreter;
 });

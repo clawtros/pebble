@@ -5,11 +5,12 @@ define(['mapper'], function(mapper) {
         this.instruction = instruction;
         this.a = a;
         this.b = b;
+        this.instructionset = instructionset;
     };
 
     InstructionRow.prototype = {
         execute: function(instructionset) {
-            instructionset.instructions[mapper[this.instruction]](this.a, this.b);
+            this.instructionset.instructions[mapper[this.instruction]](this.a, this.b);
         }
     };
 

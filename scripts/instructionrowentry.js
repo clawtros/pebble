@@ -1,6 +1,7 @@
 define(['instructionrow'], function(InstructionRow) {
 
-    var InstructionRowEntry = function(parent) {
+    var InstructionRowEntry = function(parent, instructionset) {
+        this.instructionset = instructionset;
         this.parent = parent;
     };
 
@@ -39,10 +40,12 @@ define(['instructionrow'], function(InstructionRow) {
         },
 
         asInstructionRow: function() {
-            return new InstructionRow(this.labelCell.querySelector('.input').getAttribute('value'),
-                                      this.instructionCell.querySelector('.input').getAttribute('value'),
-                                      this.firstArgCell.querySelector('.input').getAttribute('value'),
-                                      this.secondArgCell.querySelector('.input').getAttribute('value'));
+            return new InstructionRow(
+                this.instructionset,
+                this.labelCell.querySelector('.input').getAttribute('value'),
+                this.instructionCell.querySelector('.input').getAttribute('value'),
+                this.firstArgCell.querySelector('.input').getAttribute('value'),
+                this.secondArgCell.querySelector('.input').getAttribute('value'));
                                       
         }
     };

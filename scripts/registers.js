@@ -7,7 +7,7 @@ define(['register'], function (Register) {
 
     Registers.prototype = {
         get: function(register_id) {
-            return this.registers[register_id].value;
+            return this.registers[register_id];
         },
 
         initialize: function() {
@@ -18,7 +18,6 @@ define(['register'], function (Register) {
                 this.row.appendChild(element);
                 var register = new Register(element);
                 this.registers.push(register);
-                register.value = 2;
             }
         }
     };
