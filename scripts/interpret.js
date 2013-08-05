@@ -46,10 +46,10 @@ define(['memory', 'registers', 'entrytable', 'stack', 'instructionset'],
 
         run: function() {
             var instructions = this.entrytable.getInstructions();
-            console.log(instructions);
             this.stack.parse(instructions);
-            console.log(this.stack);
-            this.stack.step();
+            while (this.stack.canExecute()) {
+                this.stack.step();
+            }
         }
     };
 

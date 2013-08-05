@@ -15,7 +15,11 @@ define([], function () {
             },
 
             "STORE" : function (a, b) {
-                this.memory[a][b].value = this.registers.get(0).value;
+                this.memory.store(this.registers.get(0).value, a, b);
+            },
+
+            "SUB" : function (a, b) {
+                this.registers.get(0) = this.registers.get(1).value - this.registers.get(2).value;
             },
 
             "RECALL" : function (a, b) {
