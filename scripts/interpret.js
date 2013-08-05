@@ -40,7 +40,6 @@ define(['memory', 'registers', 'entrytable', 'stack', 'instructionset'],
             this.initializeMemory();
             this.initializeRegisters();
             this.initializeStack();
-            console.log(this.memory, this.registers, this.stack);
             this.instructionset = new InstructionSet(this.memory, this.registers, this.stack);
             this.initializeInput();
         },
