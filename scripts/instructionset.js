@@ -19,11 +19,11 @@ define([], function () {
             },
 
             "SUB" : function (a, b) {
-                this.registers.get(0) = this.registers.get(1).value - this.registers.get(2).value;
+                this.registers.get(0).value = this.registers.get(a).value - this.registers.get(b).value;
             },
 
             "RECALL" : function (a, b) {
-                this.registers.get(0) = this.memory[a][b].value;
+                this.registers.get(0).value = this.memory[a][b].value;
             },
 
             "JUMP_IF_ZERO" : function (a) {

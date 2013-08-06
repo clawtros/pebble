@@ -1,5 +1,5 @@
 define(['mapper'], function(mapper) {
-
+    // TODO: maybe wrap this all up in a Machine
     var InstructionRow = function(instructionset, label, instruction, a, b) {
         this.label = label;
         this.instruction = instruction;
@@ -10,7 +10,6 @@ define(['mapper'], function(mapper) {
 
     InstructionRow.prototype = {
         execute: function(instructionset) {
-            console.log(mapper[this.instruction], this.a, this.b );
             this.instructionset.getInstruction(mapper[this.instruction], this.a, this.b );
         }
     };

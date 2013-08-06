@@ -30,24 +30,34 @@ define(['instructionrow'], function(InstructionRow) {
             this.firstArgInput.setAttribute('type', 'number');
             this.firstArgCell.appendChild(this.firstArgInput);
 
-            this.secondArgCell = this.element.appendChild(document.createElement("td"));
+            this.firstArgInputCheck = document.createElement("input");
+            this.firstArgInputCheck.className = "is_register";
+            this.firstArgInputCheck.setAttribute('type', 'checkbox');
+            this.firstArgCell.appendChild(this.firstArgInputCheck);
 
+            this.secondArgCell = this.element.appendChild(document.createElement("td"));
             this.secondArgInput = document.createElement("input");
             this.secondArgInput.className = "entry_cell";
             this.secondArgInput.setAttribute('type', 'number');
             this.secondArgCell.appendChild(this.secondArgInput);
+
+            this.secondArgInputCheck = document.createElement("input");
+            this.firstArgInputCheck.className = "is_register";
+            this.secondArgInputCheck.setAttribute('type', 'checkbox');
+            this.secondArgCell.appendChild(this.secondArgInputCheck);
 
         },
 
         asInstructionRow: function() {
             if (!this.labelCell.querySelector('input').value && !this.instructionCell.querySelector('input').value)
                 return false;
+
             return new InstructionRow(
                 this.instructionset,
-                this.labelCell.querySelector('input').value,
-                this.instructionCell.querySelector('input').value,
-                this.firstArgCell.querySelector('input').value,
-                this.secondArgCell.querySelector('input').value);
+                this.labelCell.querySelector('.entry_cell').value,
+                this.instructionCell.querySelector('.entry_cell').value,
+                new ValOrRegister(this.firstArgCell.querySelector('.entry_cell').value, this.firstArgCell.querySelector('.is_register').getAttribute('checked')),
+                new ValOrRegister(this.secondArgCell.querySelector('.entry_cell').value, this.secondArgCell.querySelector('.is_register').getAttribute('checked')));
                                       
         }
     };
