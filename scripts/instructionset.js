@@ -11,7 +11,6 @@ define([], function () {
         },
         instructions: {
             "MOVE" : function(a, b) {
-                console.log(a.value, b.value);
                 // fixme: haaack
                 var newval = b.value;
                 if (newval.value)
@@ -20,20 +19,41 @@ define([], function () {
             },
 
             "STORE" : function (a, b) {
-                this.memory.store(this.registers.get(0).value, a.value, b.value);
+                var newval_a = a.value;
+                if (newval_a.value)
+                    newval_a = newval_a.value
+                
+                var newval_b = b.value;
+                if (newval_b.value)
+                    newval_b = newval_b.value
+
+
+                this.memory.store(this.registers.get(0).value, newval_a, newval_b);
             },
 
             "SUB" : function (a, b) {
-                this.registers.get(0).value = a.value - b.value;
+                var newval_a = a.value;
+                if (newval_a.value)
+                    newval_a = newval_a.value
+                
+                var newval_b = b.value;
+                if (newval_b.value)
+                    newval_b = newval_b.value
+                
+                this.registers.get(0).value = newval_a - newval_b;
             },
 
             "RECALL" : function (a, b) {
                 this.registers.get(0).value = this.memory[a][b].value;
             },
-
+            "JUMP_IF_NOT_ZERO" : function (a) {
+                if (this.registers.get(0).value != 0) {
+                    this.stack.setExecutionPoint(a.value);
+                }
+            },
             "JUMP_IF_ZERO" : function (a) {
-                if (registers.get(0) == 0) {
-                    this.stack.setExecutionPoint(this.stack.getLabel(a));
+                if (this.registers.get(0).value == 0) {
+                    this.stack.setExecutionPoint(a.value);
                 }
             }
 

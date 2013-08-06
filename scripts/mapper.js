@@ -1,8 +1,9 @@
 define([], function() {
     return { 1: "MOVE",
-             2: "STORE",
-             3: "SUB",
-             4: "JUMP_IF_ZERO",
-             5: "RECALL"
+             2: "SUB",
+             3: "STORE",
+             4: "RECALL",
+             5: "JUMP_IF_ZERO",
+             6: "JUMP_IF_NOT_ZERO"
              }
 });
