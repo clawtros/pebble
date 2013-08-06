@@ -11,15 +11,16 @@ define([], function () {
         },
         instructions: {
             "MOVE" : function(a, b) {
-                this.registers.get(a).value = b;
+                console.log(a.value, b.value);
+                a.value = b.value;
             },
 
             "STORE" : function (a, b) {
-                this.memory.store(this.registers.get(0).value, a, b);
+                this.memory.store(this.registers.get(0).value, a.value, b.value);
             },
 
             "SUB" : function (a, b) {
-                this.registers.get(0).value = this.registers.get(a).value - this.registers.get(b).value;
+                this.registers.get(0).value = a.value - b.value;
             },
 
             "RECALL" : function (a, b) {

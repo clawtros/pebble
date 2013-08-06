@@ -1,8 +1,9 @@
-define(['instructionrow'], function(InstructionRow) {
+define(['instructionrow', 'valorregister'], function(InstructionRow, ValOrRegister) {
 
-    var InstructionRowEntry = function(parent, instructionset) {
+    var InstructionRowEntry = function(parent, instructionset, registers) {
         this.instructionset = instructionset;
         this.parent = parent;
+        this.registers = registers;
     };
 
     InstructionRowEntry.prototype = {
@@ -51,13 +52,17 @@ define(['instructionrow'], function(InstructionRow) {
         asInstructionRow: function() {
             if (!this.labelCell.querySelector('input').value && !this.instructionCell.querySelector('input').value)
                 return false;
-
+            
             return new InstructionRow(
                 this.instructionset,
                 this.labelCell.querySelector('.entry_cell').value,
                 this.instructionCell.querySelector('.entry_cell').value,
-                new ValOrRegister(this.firstArgCell.querySelector('.entry_cell').value, this.firstArgCell.querySelector('.is_register').getAttribute('checked')),
-                new ValOrRegister(this.secondArgCell.querySelector('.entry_cell').value, this.secondArgCell.querySelector('.is_register').getAttribute('checked')));
+                new ValOrRegister(this.firstArgCell.querySelector('.entry_cell').value,
+                                  this.firstArgCell.querySelectorAll('input[type="checkbox"]:checked').length > 0, 
+                                  this.registers),
+                new ValOrRegister(this.secondArgCell.querySelector('.entry_cell').value, 
+                                  this.secondArgCell.querySelectorAll('input[type="checkbox"]:checked').length > 0, 
+                                  this.registers));
                                       
         }
     };

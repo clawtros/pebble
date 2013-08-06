@@ -30,7 +30,7 @@ define(['memory', 'registers', 'entrytable', 'stack', 'instructionset'],
         initializeInput: function() {
             var self = this;
             this.entrytable = new EntryTable(document.getElementById('entry'), this.instructionset, 20);
-            this.entrytable.initialize();
+            this.entrytable.initialize(this.registers);
             document.getElementById('run').addEventListener('click', function() {
                 self.run();
             });

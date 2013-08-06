@@ -7,12 +7,14 @@ define(['instructionrowentry'], function(InstructionRowEntry) {
     }
 
     EntryTable.prototype = {
-        initialize: function() {
+        initialize: function(registers) {
             this.rows = [];
             for (var i = 0; i < this.max_instructions; i++) {
                 var row = new InstructionRowEntry(
                     this.parent,
-                    this.instructionset);
+                    this.instructionset,
+                    registers
+                );
                 row.initElement();
                 this.rows.push(row);
             }
