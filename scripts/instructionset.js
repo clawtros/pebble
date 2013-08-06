@@ -12,7 +12,11 @@ define([], function () {
         instructions: {
             "MOVE" : function(a, b) {
                 console.log(a.value, b.value);
-                a.value = b.value;
+                // fixme: haaack
+                var newval = b.value;
+                if (newval.value)
+                    newval = newval.value
+                a.value = newval;
             },
 
             "STORE" : function (a, b) {
