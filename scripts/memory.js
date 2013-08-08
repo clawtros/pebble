@@ -21,7 +21,6 @@ define([], function() {
             }
         },
         store: function (v, x, y) {
-            console.log(this.representation);
             this.representation[x][y].innerHTML = v;
         }
     }        

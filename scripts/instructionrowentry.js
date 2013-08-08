@@ -1,4 +1,4 @@
-define(['instructionrow', 'valorregister'], function(InstructionRow, ValOrRegister) {
+define(['instructionrow', 'valorregister', 'mapper'], function(InstructionRow, ValOrRegister, Mapper) {
 
     var InstructionRowEntry = function(parent, instructionset, registers) {
         this.instructionset = instructionset;
@@ -19,9 +19,19 @@ define(['instructionrow', 'valorregister'], function(InstructionRow, ValOrRegist
             
             this.instructionCell = this.element.appendChild(document.createElement("td"));
 
-            this.instructionInput = document.createElement("input");
-            this.instructionInput.className = "entry_cell";
-            this.instructionInput.setAttribute('type', 'number');
+            this.instructionInput = document.createElement("select");
+            this.instructionInput.className = "select_cell";
+            var emptyopt = document.createElement("option");
+            emptyopt.setAttribute('value', "");
+            emptyopt.innerHTML = "--";
+            this.instructionInput.appendChild(emptyopt);
+
+            for (var instruction_id in Mapper) {
+                var opt = document.createElement("option");
+                opt.setAttribute("value", instruction_id);
+                opt.innerHTML = Mapper[instruction_id];
+                this.instructionInput.appendChild(opt);
+            }
             this.instructionCell.appendChild(this.instructionInput);
 
             this.firstArgCell = this.element.appendChild(document.createElement("td"));
@@ -50,13 +60,15 @@ define(['instructionrow', 'valorregister'], function(InstructionRow, ValOrRegist
         },
 
         asInstructionRow: function() {
-            if (!this.labelCell.querySelector('input').value && !this.instructionCell.querySelector('input').value)
+            var instSelect = this.instructionCell.querySelector('.select_cell'),
+                instruction = instSelect.options[instSelect.selectedIndex];
+            if (!instruction.value && !this.labelCell.querySelector('input').value) {
                 return false;
-            
+            }
             return new InstructionRow(
                 this.instructionset,
                 this.labelCell.querySelector('.entry_cell').value,
-                this.instructionCell.querySelector('.entry_cell').value,
+                instruction.value,
                 new ValOrRegister(this.firstArgCell.querySelector('.entry_cell').value,
                                   this.firstArgCell.querySelectorAll('input[type="checkbox"]:checked').length > 0, 
                                   this.registers),
